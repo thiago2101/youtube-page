@@ -545,3 +545,17 @@
                     filterButtons.forEach(btn => btn.classList.remove('active'));
                     // Adiciona a classe active ao botão clicado
                     button.classList.add('active');
+
+
+                     const filter = button.getAttribute('data-filter');
+            
+            videoItems.forEach(item => {
+                if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    });
+});

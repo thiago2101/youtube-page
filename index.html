@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conteúdo para YouTube - Leticia Lima</title>
+    <style>
+        /* Estilos Gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #000000;
+            position: relative;
+        }
+        
+        h2:after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: #DEB887;
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        /* Header */
+        header {
+            background-color: rgba(210,180,140);
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-foto {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #000000;
+            margin-right: 15px;
+            transition: transform 0.3s;
+        }
+        
+        .logo-foto:hover {
+            transform: scale(1.1);
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #000000;
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: #fff;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: #f0f0f0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #000000;
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #000000;
+        }
+        
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(255,222,173, 0.8), rgba(210,180,140, 0.8));
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            text-align: center;
+        }
+        
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #000000;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #DEB887;
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 10px;
+        }
+        
+        .btn:hover {
+            background-color: #c19a67;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Seção de Vídeos */
+        .videos-intro {
+            text-align: center;
+            margin-bottom: 50px;
+            color: #333;
+        }
+        
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .video-item {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .video-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 100%; /* Proporção 1:1 para redes sociais */
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-container iframe,
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            object-fit: cover;
+        }
+        
+        .video-info {
+            padding: 20px;
+        }
+        
+        .video-info h3 {
+            color: #000;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .video-info p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .video-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .video-tag {
+            background-color: #DEB887;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+        
+        /* Filtros */
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 90px;
+        }
+        
+        .filter-btn {
+            background-color: #f1f1f1;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background-color: #DEB887;
+            color: white;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #0a0a0a;
+            padding: 50px 0 20px;
+            text-align: center;
+            border-top: 1px solid #333;
+        }
+        
+        .social-links {
+            margin-bottom: 30px;
+        }
+        
+        .social-links a {
+            color: #f0f0f0;
+            margin: 0 15px;
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #DEB887;
+        }
+        
+        footer p {
+            color: #ccc;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+            
+            .logo-container {
+                margin-bottom: 15px;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 10px 15px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .videos-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filters {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .filter-btn {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="container header-container">
+            <div class="logo-container">
+                <!-- Foto redonda no lugar do logo -->
+                <img src="img/leticiafotosite.jpg" alt="Leticia Lima" class="logo-foto">
+                <a href="#" class="logo">Leticia<span> Lima</span></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#videos">Vídeos</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="container hero-content">
+            <h1>Conteúdo para YouTube</h1>
+            <p>Vídeos editados com criatividade e estratégia para engajar seu público</p>
+            <div>
+                <a href="#videos" class="btn">Ver Vídeos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Vídeos -->
+    <section id="videos">
+        <div class="container">
+            <h2>Meus Trabalhos</h2>
+            
+            <div class="videos-intro">
+                <p>Confira abaixo uma seleção dos vídeos que editei para o YouTube. Cada projeto foi pensado estrategicamente para maximizar o engajamento e transmitir a mensagem desejada.</p>
+            </div>
+            
+            <!-- Filtros -->
+            <div class="filters">
+                
+
+            
+            <!-- Grid de Vídeos -->
+            <div class="videos-grid">
+                <!-- Vídeo 1 -->
+                <div class="video-item" data-category="instagram">
+                    <div class="video-container">
+                        <!-- Substitua pelo seu vídeo -->
+                        <video controls poster="img/aluguelemport.png">
+                            <source src="video/ALUGUEL EM PORTUGAL TOUR PELA MINHA CASA NO PORTO, PREÇO E CUIDADOS PARA VOCÊ TER NA HORA DE ALUGAR - Malu Osowski (480p, h264, youtube).mp4" type="video/mp4">
+                            Seu navegador não suporta o elemento de vídeo.
+                        </video>
+                    </div>
+                    <div class="video-info">
+                        <h3>Nutrição</h3>
+                        <p>Nutrição de forma saudável e
+descomplicada
+</p>
+                        <div class="video-tags">
+                            <span class="video-tag">Instagram</span>
+                            <span class="video-tag">Moda</span>
+                            <span class="video-tag">Reels</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Vídeo 2 -->
+                <div class="video-item" data-category="tiktok">
+                    <div class="video-container">
+                        <video controls poster="img/thumbnail-tiktok.jpg">
+                            <source src="videos/tiktok-desafio.mp4" type="video/mp4">
+                            Seu navegador não suporta o elemento de vídeo.
+                        </video>
+                    </div>
+                    <div class="video-info">
+                        <h3>Desafio Viral</h3>
+                        <p>Edição rápida e dinâmica para desafio do TikTok com mais de 500k visualizações.</p>
+                        <div class="video-tags">
+                            <span class="video-tag">TikTok</span>
+                            <span class="video-tag">Viral</span>
+                            <span class="video-tag">Trend</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Vídeo 3 -->
+                <div class="video-item" data-category="facebook">
+                    <div class="video-container">
+                        <video controls poster="img/thumbnail-facebook.jpg">
+                            <source src="videos/facebook-depoimento.mp4" type="video/mp4">
+                            Seu navegador não suporta o elemento de vídeo.
+                        </video>
+                    </div>
+                    <div class="video-info">
+                        <h3>Depoimento de Cliente</h3>
+                        <p>Edição de depoimento com gráficos animados e cortes precisos para Facebook.</p>
+                        <div class="video-tags">
+                            <span class="video-tag">Facebook</span>
+                            <span class="video-tag">Depoimento</span>
+                            <span class="video-tag">Branding</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Vídeo 4 -->
+                <div class="video-item" data-category="instagram">
+                    <div class="video-container">
+                        <video controls poster="img/thumbnail-instagram2.jpg">
+                            <source src="videos/instagram-produto.mp4" type="video/mp4">
+                            Seu navegador não suporta o elemento de vídeo.
+                        </video>
+                    </div>
+                    <div class="video-info">
+                        <h3>Reels do Produto</h3>
+                        <p>Reels destacando características principais do produto com textos animados.</p>
+                        <div class="video-tags">
+                            <span class="video-tag">Instagram</span>
+                            <span class="video-tag">Produto</span>
+                            <span class="video-tag">Reels</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Vídeo 5 -->
+                <div class="video-item" data-category="tiktok">
+                    <div class="video-container">
+                        <video controls poster="img/thumbnail-tiktok2.jpg">
+                            <source src="videos/tiktok-trend.mp4" type="video/mp4">
+                            Seu navegador não suporta o elemento de vídeo.
+                        </video>
+                    </div>
+                    <div class="video-info">
+                        <h3>Trend do Momento</h3>
+                        <p>Edição para trend viral do TikTok com efeitos sonoros e transições sincronizadas.</p>
+                        <div class="video-tags">
+                            <span class="video-tag">TikTok</span>
+                            <span class="video-tag">Trend</span>
+                            <span class="video-tag">Viral</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Vídeo 6 -->
+                <div class="video-item" data-category="facebook">
+                    <div class="video-container">
+                        <video controls poster="img/thumbnail-facebook2.jpg">
+                            <source src="videos/facebook-anuncio.mp4" type="video/mp4">
+                            Seu navegador não suporta o elemento de vídeo.
+                        </video>
+                    </div>
+                    <div class="video-info">
+                        <h3>Anúncio Promocional</h3>
+                        <p>Anúncio em vídeo para Facebook Ads com call-to-action claro e objetivo.</p>
+                        <div class="video-tags">
+                            <span class="video-tag">Facebook</span>
+                            <span class="video-tag">Ads</span>
+                            <span class="video-tag">Promocional</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contato" style="background-color: #DEB887;">
+        <div class="container">
+            <h2 style="color: #fff;">Entre em Contato</h2>
+            <div style="text-align: center; margin-bottom: 40px;">
+                <p style="color: #000; margin-bottom: 30px;">Gostou do meu trabalho? Vamos criar conteúdo incrível para suas redes sociais!</p>
+                <a href="https://api.whatsapp.com/send?phone=5521986751196&text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20o%20seu%20trabalho%F0%9F%8E%AC" class="btn" style="background-color: #25D366;">Fale pelo WhatsApp</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://www.instagram.com/a.limaleticia/">Instagram</a>
+                <a href="#">LinkedIn</a>
+            </div>
+            <p>&copy; 2025 Leticia Lima - Editora e Produtora de Vídeos. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Filtros de vídeos
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const videoItems = document.querySelectorAll('.video-item');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove a classe active de todos os botões
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Adiciona a classe active ao botão clicado
+                    button.classList.add('active');
+
+
+                     const filter = button.getAttribute('data-filter');
+            
+            videoItems.forEach(item => {
+                if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    });
+});
